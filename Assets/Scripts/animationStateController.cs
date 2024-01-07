@@ -1,5 +1,5 @@
+using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class animationStateController : MonoBehaviour
@@ -9,6 +9,24 @@ public class animationStateController : MonoBehaviour
     int isWalkingBackwardHash;
     int isWalkingLeftHash;
     int isWalkingRightHash;
+    bool isWalkingInAnyDiraction;
+    public bool isGrounded;
+
+    private void OnEnable()
+    {
+        playerController.OnGroundedChanged += UpdateGroundedState;
+    }
+
+    private void OnDisable()
+    {
+        playerController.OnGroundedChanged -= UpdateGroundedState;
+    }
+
+    private void UpdateGroundedState(bool _isGrounded)
+    {
+        isGrounded = _isGrounded;
+        animator.SetBool("IsGrounded", _isGrounded);
+    }
 
     void Start()
     {
@@ -25,10 +43,11 @@ public class animationStateController : MonoBehaviour
         bool backwardPressed = Input.GetKey(KeyCode.S);
         bool leftPressed = Input.GetKey(KeyCode.A);
         bool rightPressed = Input.GetKey(KeyCode.D);
-        bool jumpPressed = Input.GetKey(KeyCode.Space);
+        bool jumpPressed = Input.GetKeyDown(KeyCode.Space);
 
         bool isJumping = animator.GetBool("jumpFromIdle") || animator.GetBool("jumpFromWalking");
 
+        isWalkingInAnyDiraction = animator.GetBool("isWalkingForward") || animator.GetBool("isWalkingBackward") || animator.GetBool("isWalkingLeft") || animator.GetBool("isWalkingRight");
         // Forward Movement
         animator.SetBool(isWalkingForwardHash, forwardPressed && !isJumping);
 
@@ -45,22 +64,27 @@ public class animationStateController : MonoBehaviour
         if (jumpPressed && !isJumping)
         {
             StartCoroutine(JumpOnce());
+            print("JUMPING");
         }
     }
 
     IEnumerator JumpOnce()
     {
-        if (animator.GetBool("isWalking") == true)
-        {
-            animator.SetBool("jumpFromWalking", true);
-            yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length + animator.GetCurrentAnimatorStateInfo(0).normalizedTime - 0.5f);
-            animator.SetBool("jumpFromWalking", false);
-        }
-        else
+        //if (animator.GetBool("jumpFromIdle") || animator.GetBool("jumpFromWalking") || !isGrounded)
+        //{
+        //    yield return null;
+        //}
+        if (!isWalkingInAnyDiraction && isGrounded)
         {
             animator.SetBool("jumpFromIdle", true);
-            yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length + animator.GetCurrentAnimatorStateInfo(0).normalizedTime - 1.5f);
+            yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length + animator.GetCurrentAnimatorStateInfo(0).normalizedTime - 6);
             animator.SetBool("jumpFromIdle", false);
+        }
+        else if (isGrounded)
+        {
+            animator.SetBool("jumpFromWalking", true);
+            yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length + animator.GetCurrentAnimatorStateInfo(0).normalizedTime - 1.5f);
+            animator.SetBool("jumpFromWalking", false);
         }
     }
 }

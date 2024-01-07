@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,7 @@ public class playerController : MonoBehaviour
     public float jumpForce = 7f;
     public Rigidbody rb;
     public bool isGrounded;
+    public static event Action<bool> OnGroundedChanged; // Event for grounded state change
 
     void Start()
     {
@@ -45,6 +47,7 @@ public class playerController : MonoBehaviour
         {
             isGrounded = true;
         }
+        OnGroundedChanged?.Invoke(isGrounded); // Invoke the event
     }
 
     void OnCollisionExit(Collision other)
@@ -53,6 +56,7 @@ public class playerController : MonoBehaviour
         {
             isGrounded = false;
         }
+        OnGroundedChanged?.Invoke(isGrounded); // Invoke the event
     }
 
 }
