@@ -5,39 +5,44 @@ using UnityEngine;
 public class animationStateController : MonoBehaviour
 {
     Animator animator;
-    int isWalkingHash;
+    int isWalkingForwardHash;
+    int isWalkingBackwardHash;
+    int isWalkingLeftHash;
+    int isWalkingRightHash;
 
     void Start()
     {
         animator = GetComponent<Animator>();
-        isWalkingHash = Animator.StringToHash("isWalking");
+        isWalkingForwardHash = Animator.StringToHash("isWalkingForward");
+        isWalkingBackwardHash = Animator.StringToHash("isWalkingBackward");
+        isWalkingLeftHash = Animator.StringToHash("isWalkingLeft");
+        isWalkingRightHash = Animator.StringToHash("isWalkingRight");
     }
 
-    // Update is called once per frame
     void Update()
     {
-        bool forwordPressed = Input.GetKey(KeyCode.W);
+        bool forwardPressed = Input.GetKey(KeyCode.W);
+        bool backwardPressed = Input.GetKey(KeyCode.S);
+        bool leftPressed = Input.GetKey(KeyCode.A);
+        bool rightPressed = Input.GetKey(KeyCode.D);
         bool jumpPressed = Input.GetKey(KeyCode.Space);
-        bool isWalking = animator.GetBool(isWalkingHash);
 
-        #region Jumping
-        bool isJumping;
+        bool isJumping = animator.GetBool("jumpFromIdle") || animator.GetBool("jumpFromWalking");
 
-        if (animator.GetBool("jumpFromIdle") == false || animator.GetBool("jumpFromWalking") == false)
-            isJumping = false;
-        else isJumping = true;
-        #endregion
+        // Forward Movement
+        animator.SetBool(isWalkingForwardHash, forwardPressed && !isJumping);
 
+        // Backward Movement
+        animator.SetBool(isWalkingBackwardHash, backwardPressed && !isJumping);
 
-        if (forwordPressed && !isWalking && !isJumping)
-        {
-            animator.SetBool(isWalkingHash, true);
-        }
-        if(!forwordPressed && isWalking && !isJumping)
-        {
-            animator.SetBool(isWalkingHash, false);
-        }
-        if(jumpPressed && !isJumping) 
+        // Left Movement
+        animator.SetBool(isWalkingLeftHash, leftPressed && !isJumping);
+
+        // Right Movement
+        animator.SetBool(isWalkingRightHash, rightPressed && !isJumping);
+
+        // Jump
+        if (jumpPressed && !isJumping)
         {
             StartCoroutine(JumpOnce());
         }
@@ -48,13 +53,13 @@ public class animationStateController : MonoBehaviour
         if (animator.GetBool("isWalking") == true)
         {
             animator.SetBool("jumpFromWalking", true);
-            yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length + animator.GetCurrentAnimatorStateInfo(0).normalizedTime);
+            yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length + animator.GetCurrentAnimatorStateInfo(0).normalizedTime - 0.5f);
             animator.SetBool("jumpFromWalking", false);
         }
         else
         {
             animator.SetBool("jumpFromIdle", true);
-            yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length + animator.GetCurrentAnimatorStateInfo(0).normalizedTime);
+            yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length + animator.GetCurrentAnimatorStateInfo(0).normalizedTime - 1.5f);
             animator.SetBool("jumpFromIdle", false);
         }
     }
