@@ -10,6 +10,8 @@ public class playerController : MonoBehaviour
     public Rigidbody rb;
     public bool isGrounded;
     public static event Action<bool> OnGroundedChanged; // Event for grounded state change
+    public static event Action<bool> OnKeyReleased; // Event for grounded state change
+
 
     void Start()
     {
@@ -46,8 +48,8 @@ public class playerController : MonoBehaviour
         if (other.gameObject.CompareTag("Ground"))
         {
             isGrounded = true;
+            OnGroundedChanged?.Invoke(isGrounded); // Invoke the event
         }
-        OnGroundedChanged?.Invoke(isGrounded); // Invoke the event
     }
 
     void OnCollisionExit(Collision other)
@@ -55,8 +57,8 @@ public class playerController : MonoBehaviour
         if (other.gameObject.CompareTag("Ground"))
         {
             isGrounded = false;
+            OnGroundedChanged?.Invoke(isGrounded); // Invoke the event
         }
-        OnGroundedChanged?.Invoke(isGrounded); // Invoke the event
     }
 
 }

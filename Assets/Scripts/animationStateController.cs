@@ -5,6 +5,7 @@ using UnityEngine;
 public class animationStateController : MonoBehaviour
 {
     Animator animator;
+    playerController _playerController;
     int isWalkingForwardHash;
     int isWalkingBackwardHash;
     int isWalkingLeftHash;
@@ -14,18 +15,41 @@ public class animationStateController : MonoBehaviour
 
     private void OnEnable()
     {
+        _playerController = GetComponent<playerController>();
         playerController.OnGroundedChanged += UpdateGroundedState;
+        playerController.OnKeyReleased += UpdateToIdle;
+
     }
 
     private void OnDisable()
     {
         playerController.OnGroundedChanged -= UpdateGroundedState;
+        playerController.OnKeyReleased += UpdateToIdle;
+
+    }
+
+    private void UpdateToIdle(bool obj)
+    {
+        // Forward Movement
+        animator.SetBool(isWalkingForwardHash, false);
+
+        // Backward Movement
+        animator.SetBool(isWalkingBackwardHash, false);
+
+        // Left Movement
+        animator.SetBool(isWalkingLeftHash, false);
+
+        // Right Movement
+        animator.SetBool(isWalkingRightHash, false);
     }
 
     private void UpdateGroundedState(bool _isGrounded)
     {
         isGrounded = _isGrounded;
-        animator.SetBool("IsGrounded", _isGrounded);
+        animator.SetBool("isGrounded", _isGrounded);
+
+        if (!_isGrounded)
+            animator.SetBool("isJumping", false);
     }
 
     void Start()
@@ -44,26 +68,26 @@ public class animationStateController : MonoBehaviour
         bool leftPressed = Input.GetKey(KeyCode.A);
         bool rightPressed = Input.GetKey(KeyCode.D);
         bool jumpPressed = Input.GetKeyDown(KeyCode.Space);
-        bool isJumping = animator.GetBool("isJumping");
 
         isWalkingInAnyDiraction = animator.GetBool("isWalkingForward") || animator.GetBool("isWalkingBackward") || animator.GetBool("isWalkingLeft") || animator.GetBool("isWalkingRight");
 
         // Forward Movement
-        animator.SetBool(isWalkingForwardHash, forwardPressed && !isJumping);
+        animator.SetBool(isWalkingForwardHash, forwardPressed && _playerController.isGrounded);
 
         // Backward Movement
-        animator.SetBool(isWalkingBackwardHash, backwardPressed && !isJumping);
+        animator.SetBool(isWalkingBackwardHash, backwardPressed && _playerController.isGrounded);
 
         // Left Movement
-        animator.SetBool(isWalkingLeftHash, leftPressed && !isJumping);
+        animator.SetBool(isWalkingLeftHash, leftPressed && _playerController.isGrounded);
 
         // Right Movement
-        animator.SetBool(isWalkingRightHash, rightPressed && !isJumping);
+        animator.SetBool(isWalkingRightHash, rightPressed && _playerController.isGrounded);
 
         // Jump
-        if (jumpPressed && !isJumping)
+        if (jumpPressed && _playerController.isGrounded)
         {
-            StartCoroutine(JumpOnce());
+            animator.SetBool("isJumping", true);
+            //StartCoroutine(JumpOnce());
         }
     }
 
