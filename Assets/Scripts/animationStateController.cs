@@ -90,7 +90,7 @@ public class animationStateController : MonoBehaviour
         // Jump
         if (jumpPressed && _playerController.isGrounded)
         {
-            animator.SetBool("isJumping", true);
+            animator.Play("Jump", -1, 0); // Force play the animation
             //StartCoroutine(JumpOnce());
         }
     }
