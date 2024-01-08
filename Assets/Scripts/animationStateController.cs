@@ -18,16 +18,20 @@ public class animationStateController : MonoBehaviour
         _playerController = GetComponent<playerController>();
         playerController.OnGroundedChanged += UpdateGroundedState;
         playerController.OnKeyReleased += UpdateToIdle;
-
+        PlayerHealth.OnGettingHit += PlayerHealth_OnGettingHit;
     }
 
     private void OnDisable()
     {
         playerController.OnGroundedChanged -= UpdateGroundedState;
-        playerController.OnKeyReleased += UpdateToIdle;
-
+        playerController.OnKeyReleased -= UpdateToIdle;
+        PlayerHealth.OnGettingHit -= PlayerHealth_OnGettingHit;
     }
 
+    private void PlayerHealth_OnGettingHit(int obj)
+    {
+        animator.Play("Hit", -1,0); // Force play the animation
+    }
     private void UpdateToIdle(bool obj)
     {
         // Forward Movement
@@ -91,13 +95,13 @@ public class animationStateController : MonoBehaviour
         }
     }
 
-    IEnumerator JumpOnce()
+    IEnumerator PlayOnce()
     {
         if (isGrounded)
         {
-            animator.SetBool("isJumping", true);
-            yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length + animator.GetCurrentAnimatorStateInfo(0).normalizedTime);
-            animator.SetBool("isJumping", false);
+            animator.SetBool("onGettingHit", true);
+            yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length + animator.GetCurrentAnimatorStateInfo(0).normalizedTime - 4);
+            animator.SetBool("onGettingHit", false);
         }
     }
 }
