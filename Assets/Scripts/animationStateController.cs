@@ -44,10 +44,10 @@ public class animationStateController : MonoBehaviour
         bool leftPressed = Input.GetKey(KeyCode.A);
         bool rightPressed = Input.GetKey(KeyCode.D);
         bool jumpPressed = Input.GetKeyDown(KeyCode.Space);
-
-        bool isJumping = animator.GetBool("jumpFromIdle") || animator.GetBool("jumpFromWalking");
+        bool isJumping = animator.GetBool("isJumping");
 
         isWalkingInAnyDiraction = animator.GetBool("isWalkingForward") || animator.GetBool("isWalkingBackward") || animator.GetBool("isWalkingLeft") || animator.GetBool("isWalkingRight");
+
         // Forward Movement
         animator.SetBool(isWalkingForwardHash, forwardPressed && !isJumping);
 
@@ -64,27 +64,16 @@ public class animationStateController : MonoBehaviour
         if (jumpPressed && !isJumping)
         {
             StartCoroutine(JumpOnce());
-            print("JUMPING");
         }
     }
 
     IEnumerator JumpOnce()
     {
-        //if (animator.GetBool("jumpFromIdle") || animator.GetBool("jumpFromWalking") || !isGrounded)
-        //{
-        //    yield return null;
-        //}
-        if (!isWalkingInAnyDiraction && isGrounded)
+        if (isGrounded)
         {
-            animator.SetBool("jumpFromIdle", true);
-            yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length + animator.GetCurrentAnimatorStateInfo(0).normalizedTime - 6);
-            animator.SetBool("jumpFromIdle", false);
-        }
-        else if (isGrounded)
-        {
-            animator.SetBool("jumpFromWalking", true);
-            yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length + animator.GetCurrentAnimatorStateInfo(0).normalizedTime - 1.5f);
-            animator.SetBool("jumpFromWalking", false);
+            animator.SetBool("isJumping", true);
+            yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length + animator.GetCurrentAnimatorStateInfo(0).normalizedTime);
+            animator.SetBool("isJumping", false);
         }
     }
 }

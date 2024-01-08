@@ -25,17 +25,18 @@ public class SpawnManager : MonoBehaviour
 
     public static event Action<GameObject> OnTouchingFloor; // Event for grounded state change
 
-    public Transform spawnPoint;
+    public List<Transform> spawnPoint;
 
     public GameObject player;
 
+    int currentSpawn = 0;
     private void Start()
     {
-        player.transform.position = spawnPoint.position;
+        player.transform.position = spawnPoint[currentSpawn].position;
     }
 
     public void Respawn()
     {
-        player.transform.position = spawnPoint.position;
+        player.transform.position = spawnPoint[currentSpawn].position;
     }
 }
