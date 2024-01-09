@@ -4,8 +4,13 @@ using UnityEngine;
 
 public class TrapGameObject : MonoBehaviour
 {
-    [SerializeField] int trapDmg;
+    int trapDmg;
+    public float upTime;
 
+    private void Start()
+    {
+        Destroy(gameObject, upTime);
+    }
     private void OnCollisionEnter(Collision collision)
     {
         print("Found Collision");
@@ -19,5 +24,9 @@ public class TrapGameObject : MonoBehaviour
                 print("GET HITTTTTTTT");
             }
         }
+    }
+    public void ChangeTrapDamage(int damage)
+    {
+        trapDmg = damage;
     }
 }
