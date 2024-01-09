@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 4007154653354518711}
   - component: {fileID: 4007154653354518710}
   - component: {fileID: 4007154653354518666}
+  - component: {fileID: -7800717215030149220}
   m_Layer: 0
   m_Name: Trap
   m_TagString: Untagged
@@ -149,6 +150,20 @@ MonoBehaviour:
   shootPoint: {fileID: 4007154653249087323}
   shootDelay: 2
   trapDmg: 0
+--- !u!114 &-7800717215030149220
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4007154653354518705}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3ad129f4be05bd4f81b0e11c60fdb29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  replacementObjects: []
+  selectedIndex: 0
 --- !u!1 &4007154654560917937
 GameObject:
   m_ObjectHideFlags: 0
