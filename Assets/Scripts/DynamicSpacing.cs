@@ -12,11 +12,11 @@ public class DynamicSpacing : MonoBehaviour
     {
         PlayerHealth.SentHpOnGameStart += InisiateHP;
         PlayerHealth.OnGettingHit += OnGettingHit;
-
     }
 
     private void InisiateHP(int hp)
     {
+        ClearAllChildren();
         imageCount = hp;
         for (int i = 0; i < imageCount; i++) 
         {
@@ -34,11 +34,14 @@ public class DynamicSpacing : MonoBehaviour
     private void OnGettingHit(int obj)
     {
         imageCount -= obj;
+        ResizePanel();
+        InisiateHP(imageCount);
     }
 
     void Start()
     {
         ResizePanel();
+        
     }
 
     void ResizePanel()
@@ -49,5 +52,14 @@ public class DynamicSpacing : MonoBehaviour
 
         // Set the size of the panel
         panel.sizeDelta = new Vector2(totalWidth, panel.sizeDelta.y);
+    }
+
+    public void ClearAllChildren()
+    {
+        // Iterate through all children and destroy them
+        foreach (Transform child in transform)
+        {
+            GameObject.Destroy(child.gameObject);
+        }
     }
 }

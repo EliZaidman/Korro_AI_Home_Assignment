@@ -6,7 +6,6 @@ public class TrapGameObject : MonoBehaviour
 {
     int trapDmg;
     public float upTime;
-
     private void Start()
     {
         Destroy(gameObject, upTime);
@@ -21,7 +20,6 @@ public class TrapGameObject : MonoBehaviour
             if (player != null)
             {
                 player.Hit(trapDmg);
-                print("GET HITTTTTTTT");
             }
         }
     }
