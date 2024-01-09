@@ -58,15 +58,25 @@ public class playerController : MonoBehaviour
         }
 
     }
+    public float groundCheckAngle = 45f; // Maximum angle to be considered as grounded
 
     // Check if the player is grounded
     void OnCollisionEnter(Collision other)
     {
+        //if (other.gameObject.CompareTag("Ground"))
+        //{
+        //    isGrounded = true;
+
+        //}
+
         if (other.gameObject.CompareTag("Ground"))
         {
-            isGrounded = true;
-            OnGroundedChanged?.Invoke(isGrounded); // Invoke the event
+            if (IsSurfaceFlat(other))
+            {
+                isGrounded = true;
+            }
         }
+
         if (other.gameObject.CompareTag("Trap"))
         {
             Vector3 hitDirection = (transform.position - other.transform.position).normalized;
@@ -76,14 +86,49 @@ public class playerController : MonoBehaviour
             print("OUTCH ITS TRAP");
         }
     }
+    private bool IsSurfaceFlat(Collision collision)
+    {
+        foreach (ContactPoint contact in collision.contacts)
+        {
+            float angle = Vector3.Angle(Vector3.up, contact.normal);
+            if (angle < groundCheckAngle)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 
     void OnCollisionExit(Collision other)
     {
         if (other.gameObject.CompareTag("Ground"))
         {
             isGrounded = false;
-            OnGroundedChanged?.Invoke(isGrounded); // Invoke the event
         }
+        //if (other.gameObject.CompareTag("Ground"))
+        //{
+        //    isGrounded = false;
+        //    OnGroundedChanged?.Invoke(isGrounded); // Invoke the event
+        //}
     }
 
+
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.gameObject.CompareTag("Ground")) // Make sure your ground objects have the tag "Ground"
+    //    {
+    //        isGrounded = true;
+    //        OnGroundedChanged?.Invoke(isGrounded); // Invoke the event
+    //    }
+    //}
+
+    //// This method is called when the feet collider exits a trigger
+    //private void OnTriggerExit(Collider other)
+    //{
+    //    if (other.gameObject.CompareTag("Ground"))
+    //    {
+    //        isGrounded = false;
+    //        OnGroundedChanged?.Invoke(isGrounded); // Invoke the event
+    //    }
+    //}
 }
