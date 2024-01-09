@@ -7,6 +7,7 @@ public class ObjectSwitcher : MonoBehaviour
 {
     public GameObject[] replacementPrefabs;
     public int selectedIndex = 0;
+    public bool shouldRetainRotation = true;
 
     public void SwitchObject()
     {
@@ -15,14 +16,24 @@ public class ObjectSwitcher : MonoBehaviour
         // Calculate the next index, looping back to 0 if at the end of the array
         selectedIndex = (selectedIndex + 1) % replacementPrefabs.Length;
 
+        // Get the current sibling index and parent transform
+        int siblingIndex = transform.GetSiblingIndex();
+        Transform parentTransform = transform.parent;
+
         // Instantiate the prefab at the new index
         GameObject replacement = PrefabUtility.InstantiatePrefab(replacementPrefabs[selectedIndex]) as GameObject;
 
         if (replacement != null)
         {
-            // Position the new object at the same place as the current one
+            // Set the new object's parent and sibling index to match the original object
+            replacement.transform.SetParent(parentTransform, worldPositionStays: false);
+            replacement.transform.SetSiblingIndex(siblingIndex);
+
+            // Position and rotate the new object like the original
             replacement.transform.position = transform.position;
-            replacement.transform.rotation = transform.rotation;
+            if (shouldRetainRotation) { replacement.transform.rotation = transform.rotation; }
+
+
 
             // Add and configure the ObjectSwitcher script on the new object
             ConfigureObjectSwitcher(replacement);
@@ -41,11 +52,10 @@ public class ObjectSwitcher : MonoBehaviour
     {
         ObjectSwitcher newSwitcher = newObject.AddComponent<ObjectSwitcher>();
         newSwitcher.replacementPrefabs = this.replacementPrefabs;
-        newSwitcher.selectedIndex = this.selectedIndex; // Keep the updated index
-        // Copy any other properties you need
+        newSwitcher.selectedIndex = this.selectedIndex;
+        newSwitcher.shouldRetainRotation = this.shouldRetainRotation;
     }
 
-    // This method can be used in the editor script to set the index manually
     public void SetSelectedIndex(int index)
     {
         if (index >= 0 && index < replacementPrefabs.Length)

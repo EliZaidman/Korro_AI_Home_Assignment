@@ -8,8 +8,8 @@ public class PlayerHealth : MonoBehaviour
 {
 
 
-   [SerializeField] private int currentHealth;
-   [SerializeField] private int maxHealth;
+    private int currentHealth;
+    [SerializeField] private int maxHealth;
 
     public static event Action<int> OnGettingHit; // Event for grounded state change
     public static event Action<int> SentHpOnGameStart; // Event for grounded state change

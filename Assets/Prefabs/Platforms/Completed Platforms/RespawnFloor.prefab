@@ -11,10 +11,8 @@ GameObject:
   - component: {fileID: 3981724362985037995}
   - component: {fileID: 3981724362985037994}
   - component: {fileID: 3981724362985037993}
-  - component: {fileID: 3981724362985037992}
   - component: {fileID: 3981724362985037999}
   - component: {fileID: 3981724362985037988}
-  - component: {fileID: -2270157894519866790}
   m_Layer: 0
   m_Name: RespawnFloor
   m_TagString: Untagged
@@ -1207,14 +1205,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &3981724362985037992
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3981724362985037998}
-  m_Mesh: {fileID: 0}
 --- !u!64 &3981724362985037999
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1241,17 +1231,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bafaf0caedd63b4384e587093bd0a52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &-2270157894519866790
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3981724362985037998}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d3ad129f4be05bd4f81b0e11c60fdb29, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  replacementObjects: []
-  selectedIndex: 0
