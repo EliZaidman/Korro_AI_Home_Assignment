@@ -343,7 +343,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3ad129f4be05bd4f81b0e11c60fdb29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  replacementPrefabs:
+  varientPrefabs:
   - {fileID: 425108826659593839, guid: cc17f7f2c8ef3c341b466e1bd6f25559, type: 3}
   - {fileID: 3120593522300083129, guid: 6d9f1e75ec4a1d140be03aac05845bac, type: 3}
   selectedIndex: 0

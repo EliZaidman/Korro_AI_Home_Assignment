@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 1741449766654600833}
   m_LocalRotation: {x: -0.13540587, y: -0.1761279, z: 0.012800628, w: 0.9749259}
   m_LocalPosition: {x: -0.00008773103, y: 2.9100688, z: 8.4199915}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -111,7 +111,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3ad129f4be05bd4f81b0e11c60fdb29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  replacementPrefabs:
-  - {fileID: 919608545795561060, guid: 668b745b42955924b967b64c07bb988f, type: 3}
+  varientPrefabs:
   - {fileID: 7224384143367931925, guid: 0b3f5efa5e7e5b24092a94632b4e86be, type: 3}
+  - {fileID: 919608545795561060, guid: 668b745b42955924b967b64c07bb988f, type: 3}
   selectedIndex: 0
+  shouldRetainRotation: 1

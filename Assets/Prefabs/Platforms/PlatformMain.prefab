@@ -329,10 +329,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3ad129f4be05bd4f81b0e11c60fdb29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  replacementPrefabs:
+  varientPrefabs:
+  - {fileID: 5670184877687826811, guid: d1ad2679a9aee904c8df5b6da882c1fb, type: 3}
+  - {fileID: 7024839563332279530, guid: dd1ccbb58e49c3345b3d5a1b3831f4f4, type: 3}
   - {fileID: 7024839563332279530, guid: 0030547bf69a82c4cb408ffae9c7b18f, type: 3}
   - {fileID: 7706800067658258642, guid: c4824ec5605ecca409d26d8f6c2926b4, type: 3}
-  - {fileID: 7024839563332279530, guid: dd1ccbb58e49c3345b3d5a1b3831f4f4, type: 3}
-  - {fileID: 5670184877687826811, guid: d1ad2679a9aee904c8df5b6da882c1fb, type: 3}
   - {fileID: 2142848918536848454, guid: 0e1690ad99491224ab5c657154e6a334, type: 3}
   selectedIndex: 0
+  shouldRetainRotation: 1

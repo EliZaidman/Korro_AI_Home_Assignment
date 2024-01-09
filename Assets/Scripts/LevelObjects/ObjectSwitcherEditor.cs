@@ -10,10 +10,10 @@ public class ObjectSwitcherEditor : Editor
 
         ObjectSwitcher switcher = (ObjectSwitcher)target;
 
-        string[] options = new string[switcher.replacementPrefabs.Length];
+        string[] options = new string[switcher.varientPrefabs.Length];
         for (int i = 0; i < options.Length; i++)
         {
-            options[i] = switcher.replacementPrefabs[i] ? switcher.replacementPrefabs[i].name : "None";
+            options[i] = switcher.varientPrefabs[i] ? switcher.varientPrefabs[i].name : "None";
         }
         int newSelectedIndex = EditorGUILayout.Popup("Select Replacement Prefab", switcher.selectedIndex, options);
         switcher.SetSelectedIndex(newSelectedIndex);

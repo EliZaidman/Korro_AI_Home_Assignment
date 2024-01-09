@@ -5,23 +5,23 @@ using UnityEditor;
 
 public class ObjectSwitcher : MonoBehaviour
 {
-    public GameObject[] replacementPrefabs;
+    public GameObject[] varientPrefabs;
     public int selectedIndex = 0;
     public bool shouldRetainRotation = true;
 
     public void SwitchObject()
     {
-        if (replacementPrefabs == null || replacementPrefabs.Length == 0) return;
+        if (varientPrefabs == null || varientPrefabs.Length == 0) return;
 
         // Calculate the next index, looping back to 0 if at the end of the array
-        selectedIndex = (selectedIndex + 1) % replacementPrefabs.Length;
+        selectedIndex = (selectedIndex + 1) % varientPrefabs.Length;
 
         // Get the current sibling index and parent transform
         int siblingIndex = transform.GetSiblingIndex();
         Transform parentTransform = transform.parent;
 
         // Instantiate the prefab at the new index
-        GameObject replacement = PrefabUtility.InstantiatePrefab(replacementPrefabs[selectedIndex]) as GameObject;
+        GameObject replacement = PrefabUtility.InstantiatePrefab(varientPrefabs[selectedIndex]) as GameObject;
 
         if (replacement != null)
         {
@@ -51,14 +51,14 @@ public class ObjectSwitcher : MonoBehaviour
     private void ConfigureObjectSwitcher(GameObject newObject)
     {
         ObjectSwitcher newSwitcher = newObject.AddComponent<ObjectSwitcher>();
-        newSwitcher.replacementPrefabs = this.replacementPrefabs;
+        newSwitcher.varientPrefabs = this.varientPrefabs;
         newSwitcher.selectedIndex = this.selectedIndex;
         newSwitcher.shouldRetainRotation = this.shouldRetainRotation;
     }
 
     public void SetSelectedIndex(int index)
     {
-        if (index >= 0 && index < replacementPrefabs.Length)
+        if (index >= 0 && index < varientPrefabs.Length)
         {
             selectedIndex = index;
         }

@@ -60,10 +60,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3ad129f4be05bd4f81b0e11c60fdb29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  replacementObjects:
-  - {fileID: 596393976820339221, guid: 1243594895259f840a20d1a102d96dd7, type: 3}
+  varientPrefabs:
   - {fileID: 5523401580421979422, guid: e83c4c2e1a6dfbc47a3c782aaa0290ad, type: 3}
+  - {fileID: 596393976820339221, guid: 1243594895259f840a20d1a102d96dd7, type: 3}
   selectedIndex: 0
+  shouldRetainRotation: 0
 --- !u!1 &1481623972852333993
 GameObject:
   m_ObjectHideFlags: 0

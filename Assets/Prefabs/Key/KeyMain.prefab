@@ -123,7 +123,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3ad129f4be05bd4f81b0e11c60fdb29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  replacementPrefabs:
+  varientPrefabs:
   - {fileID: 5251987429143521408, guid: 052dc694cfac65e4c9c01de0650097f7, type: 3}
   - {fileID: 4191215485828985880, guid: 83746fecb5f46274ab537fec3c0969d7, type: 3}
   selectedIndex: 0
+  shouldRetainRotation: 1
