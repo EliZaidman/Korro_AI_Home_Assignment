@@ -1,4 +1,4 @@
-AWSD To Move.
+W A S D To Move.
 Space To Jump.
 
-Easy prefab changes made easy with EditorScript.
+Easy prefab changes are made easy with EditorScript.
