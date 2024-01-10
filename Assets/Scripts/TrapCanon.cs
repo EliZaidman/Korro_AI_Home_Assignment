@@ -10,7 +10,7 @@ public class TrapCanon : MonoBehaviour
     public float shootDelay = 2f; // Time delay between shots
 
     private float shootTimer; // Timer to track shooting delay
-    public int trapDmg;
+    public int trapDmg = 1;
     void Update()
     {
         // Update the timer

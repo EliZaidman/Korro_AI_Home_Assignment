@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class TrapGameObject : MonoBehaviour
@@ -12,6 +13,7 @@ public class TrapGameObject : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
+        Destroy(gameObject);
         print("Found Collision");
         if (collision.gameObject.CompareTag("Player"))
         {

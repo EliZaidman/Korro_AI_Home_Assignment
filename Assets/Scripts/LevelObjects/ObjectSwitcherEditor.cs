@@ -1,9 +1,10 @@
 using UnityEngine;
+#if UNITY_EDITOR
 using UnityEditor;
-
 [CustomEditor(typeof(ObjectSwitcher))]
 public class ObjectSwitcherEditor : Editor
 {
+
     public override void OnInspectorGUI()
     {
         base.OnInspectorGUI();
@@ -24,3 +25,5 @@ public class ObjectSwitcherEditor : Editor
         }
     }
 }
+#endif
+

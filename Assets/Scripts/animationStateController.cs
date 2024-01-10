@@ -17,14 +17,12 @@ public class animationStateController : MonoBehaviour
     {
         _playerController = GetComponent<playerController>();
         playerController.OnGroundedChanged += UpdateGroundedState;
-        playerController.OnKeyReleased += UpdateToIdle;
         PlayerHealth.OnGettingHit += PlayerHealth_OnGettingHit;
     }
 
     private void OnDisable()
     {
         playerController.OnGroundedChanged -= UpdateGroundedState;
-        playerController.OnKeyReleased -= UpdateToIdle;
         PlayerHealth.OnGettingHit -= PlayerHealth_OnGettingHit;
     }
 
@@ -95,16 +93,6 @@ public class animationStateController : MonoBehaviour
                 return;
             }
             animator.Play("Jump", -1, 0); // Force play the animation
-        }
-    }
-
-    IEnumerator PlayOnce()
-    {
-        if (isGrounded)
-        {
-            animator.SetBool("onGettingHit", true);
-            yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length + animator.GetCurrentAnimatorStateInfo(0).normalizedTime - 4);
-            animator.SetBool("onGettingHit", false);
         }
     }
 }

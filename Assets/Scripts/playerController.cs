@@ -6,7 +6,7 @@ using UnityEngine;
 public class playerController : MonoBehaviour
 {
     public float moveSpeed = 5f;
-    public float jumpForce = 7f;
+    public float jumpForce = 7f; // Force applied when jumping
     public float hitForce = 5f; // Force applied when hit by a trap
     public float disableDuration = 3f; // Duration for which controls are disabled
     private bool isDisabled; // Flag to check if controls are disabled
@@ -15,7 +15,6 @@ public class playerController : MonoBehaviour
 
     public Rigidbody rb;
 
-    public static event Action<bool> OnKeyReleased; // Event for grounded state change
     public static event Action<bool> OnGroundedChanged; // Event for grounded state change
 
     void Start()
@@ -30,7 +29,7 @@ public class playerController : MonoBehaviour
             disableTimer -= Time.deltaTime;
             if (disableTimer <= 0)
             {
-                isDisabled = false; // Re-enable controls
+                isDisabled = false; // Re enable controls
             }
         }
         else
@@ -46,7 +45,6 @@ public class playerController : MonoBehaviour
             // Jump input
             if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
             {
-                // Add forward momentum to the jump if moving forward
                 Vector3 jumpVector = Vector3.up * jumpForce;
                 if (z > 0)
                 {
@@ -67,16 +65,19 @@ public class playerController : MonoBehaviour
         {
             if (IsSurfaceFlat(other))
             {
+                OnGroundedChanged?.Invoke(isGrounded);
                 isGrounded = true;
             }
         }
         if (other.gameObject.CompareTag("Trap"))
         {
-            Vector3 hitDirection = (transform.position - other.transform.position).normalized;
-            rb.AddForce(hitDirection * hitForce, ForceMode.Impulse);
+            Vector3 direction = transform.position - other.transform.position;
+            direction.y = 0; // Optional: remove vertical component to keep knockback horizontal
+
+            rb.velocity = Vector3.zero; // Reset existing velocity
+            rb.AddForce(Vector3.back * hitForce, ForceMode.Impulse);
             isDisabled = true; // Disable controls
             disableTimer = disableDuration; // Reset the timer
-            print("OUTCH ITS TRAP");
         }
     }
 
@@ -85,9 +86,11 @@ public class playerController : MonoBehaviour
         if (other.gameObject.CompareTag("Ground"))
         {
             isGrounded = false;
+            OnGroundedChanged?.Invoke(isGrounded);
         }
     }
 
+    //Checking the angle to see if the floor is flat. 
     private bool IsSurfaceFlat(Collision collision)
     {
         foreach (ContactPoint contact in collision.contacts)

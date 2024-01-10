@@ -21,8 +21,12 @@ public class ObjectSwitcher : MonoBehaviour
         Transform parentTransform = transform.parent;
 
         // Instantiate the prefab at the new index
+#if UNITY_EDITOR
         GameObject replacement = PrefabUtility.InstantiatePrefab(varientPrefabs[selectedIndex]) as GameObject;
-
+#endif
+#if !UNITY_EDITOR
+        GameObject replacement = Instantiate(varientPrefabs[selectedIndex]) as GameObject;
+#endif
         if (replacement != null)
         {
             // Set the new object's parent and sibling index to match the original object
