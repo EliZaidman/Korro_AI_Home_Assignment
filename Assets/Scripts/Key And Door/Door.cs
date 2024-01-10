@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
-    [SerializeField]Animation anim;
+    [SerializeField] Animation anim;
 
     private void OnEnable()
     {

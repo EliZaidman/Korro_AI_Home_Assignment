@@ -46,5 +46,5 @@ public class CoinsUI : MonoBehaviour
         coinCounter.text = $"Coins: {counter}";
     }
 
-   public TextMeshProUGUI getCoinCounter() { return coinCounter; }
+    public TextMeshProUGUI getCoinCounter() { return coinCounter; }
 }

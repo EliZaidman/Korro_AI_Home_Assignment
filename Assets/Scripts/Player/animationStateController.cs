@@ -28,21 +28,7 @@ public class animationStateController : MonoBehaviour
 
     private void PlayerHealth_OnGettingHit(int obj)
     {
-        animator.Play("Hit", -1,0); // Force play the animation
-    }
-    private void UpdateToIdle(bool obj)
-    {
-        // Forward Movement
-        animator.SetBool(isWalkingForwardHash, false);
-
-        // Backward Movement
-        animator.SetBool(isWalkingBackwardHash, false);
-
-        // Left Movement
-        animator.SetBool(isWalkingLeftHash, false);
-
-        // Right Movement
-        animator.SetBool(isWalkingRightHash, false);
+        animator.Play("Hit", -1, 0); // Force play the animation
     }
 
     private void UpdateGroundedState(bool _isGrounded)

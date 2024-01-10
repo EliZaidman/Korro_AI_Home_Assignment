@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TrapCanon : MonoBehaviour
 {
-    public GameObject bulletPrefab; // Assign this in the inspector
+    public GameObject bulletPrefab; // Manualy need to choose bullet(trap)
     public float shootForce = 1000f;
     public Transform shootPoint; // The point from which the bullet is shot
     public float shootDelay = 2f; // Time delay between shots
@@ -30,6 +30,7 @@ public class TrapCanon : MonoBehaviour
         {
             // Create a new bullet instance at the shootPoint position and rotation
             GameObject bullet = Instantiate(bulletPrefab, shootPoint.position, shootPoint.rotation);
+            //Override bullet damage
             bullet.GetComponent<TrapGameObject>().ChangeTrapDamage(trapDmg);
             // Add force to the bullet's Rigidbody to propel it forward
             Rigidbody rb = bullet.GetComponent<Rigidbody>();

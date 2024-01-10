@@ -33,6 +33,7 @@ public class Elevator : MonoBehaviour
         }
     }
 
+    //Making the player child of the elevator ensures that the player moves along with the platform
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Player"))

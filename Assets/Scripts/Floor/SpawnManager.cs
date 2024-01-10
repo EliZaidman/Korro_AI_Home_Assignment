@@ -23,7 +23,7 @@ public class SpawnManager : MonoBehaviour
     }
     #endregion
 
-    public static event Action<GameObject> OnTouchingFloor; // Event for grounded state change
+    public static event Action<GameObject> OnTouchingFloor;
 
     public List<Transform> spawnPoint;
 

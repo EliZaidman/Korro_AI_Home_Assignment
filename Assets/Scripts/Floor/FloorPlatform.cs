@@ -24,7 +24,7 @@ public class FloorPlatform : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            print("SPAWN PLAYER");
+            print("Spawn Player");
             SpawnManager.Instance.Respawn();
         }
     }

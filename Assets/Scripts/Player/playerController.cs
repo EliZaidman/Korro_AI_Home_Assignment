@@ -33,7 +33,7 @@ public class playerController : MonoBehaviour
             cutsceneTimer -= Time.deltaTime;
             if (cutsceneTimer <= 0)
             {
-                
+
             }
         }
         else if (isDisabled)
@@ -84,7 +84,7 @@ public class playerController : MonoBehaviour
         if (other.gameObject.CompareTag("Trap"))
         {
             Vector3 direction = transform.position - other.transform.position;
-            direction.y = 0; // Optional: remove vertical component to keep knockback horizontal
+            direction.y = 0;
 
             rb.velocity = Vector3.zero; // Reset existing velocity
             rb.AddForce(Vector3.back * hitForce, ForceMode.Impulse);

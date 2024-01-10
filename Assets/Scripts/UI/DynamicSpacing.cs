@@ -4,9 +4,9 @@ using UnityEngine.UI;
 
 public class DynamicSpacing : MonoBehaviour
 {
-    public RectTransform panel; 
+    public RectTransform panel;
     public GameObject imagePrefab;
-    public  int imageCount;
+    public int imageCount;
     public float spacing = 5f;
     private void OnEnable()
     {
@@ -18,7 +18,7 @@ public class DynamicSpacing : MonoBehaviour
     {
         ClearAllChildren();
         imageCount = hp;
-        for (int i = 0; i < imageCount; i++) 
+        for (int i = 0; i < imageCount; i++)
         {
             GameObject newInstance = Instantiate(imagePrefab);
             newInstance.transform.SetParent(gameObject.transform, false);
@@ -41,7 +41,6 @@ public class DynamicSpacing : MonoBehaviour
     void Start()
     {
         ResizePanel();
-        
     }
 
     void ResizePanel()

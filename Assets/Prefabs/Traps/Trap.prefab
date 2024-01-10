@@ -42,9 +42,9 @@ GameObject:
   - component: {fileID: 4007154653354518709}
   - component: {fileID: 4007154653354518708}
   - component: {fileID: 4007154653354518711}
-  - component: {fileID: 4007154653354518710}
   - component: {fileID: 4007154653354518666}
   - component: {fileID: -7800717215030149220}
+  - component: {fileID: 6131706678432081456}
   m_Layer: 0
   m_Name: Trap
   m_TagString: Trap
@@ -119,19 +119,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &4007154653354518710
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4007154653354518705}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &4007154653354518666
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -165,6 +152,19 @@ MonoBehaviour:
   varientPrefabs: []
   selectedIndex: 0
   shouldRetainRotation: 1
+--- !u!65 &6131706678432081456
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4007154653354518705}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.99999994, y: 1.39, z: 0.99999994}
+  m_Center: {x: 0, y: 0.49, z: 0}
 --- !u!1 &4007154654560917937
 GameObject:
   m_ObjectHideFlags: 0

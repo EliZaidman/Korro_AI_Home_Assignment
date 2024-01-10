@@ -7,7 +7,7 @@ public class Key : MonoBehaviour
 {
     public static event Action<int> OnCollectingKey;
 
-     void KeyCollected()
+    void KeyCollected()
     {
         OnCollectingKey?.Invoke(0);
     }

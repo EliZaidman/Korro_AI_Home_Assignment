@@ -9,13 +9,11 @@ public class PlayerHealth : MonoBehaviour
 {
 
 
-    private int currentHealth;
     [SerializeField] private int startingHealth = 3;
+    private int currentHealth;
 
-    public static event Action<int> OnGettingHit; // Event for grounded state change
-    public static event Action<int> SentHpOnGameStart; // Event for grounded state change
-
-    // Define an event based on the delegate
+    public static event Action<int> OnGettingHit;
+    public static event Action<int> SentHpOnGameStart;
 
     private void Start()
     {
@@ -28,6 +26,7 @@ public class PlayerHealth : MonoBehaviour
         currentHealth -= dmg;
         if (currentHealth <= 0)
         {
+            //Reload Scene
             string sceneName = SceneManager.GetActiveScene().name;
             SceneManager.LoadScene(sceneName);
         }

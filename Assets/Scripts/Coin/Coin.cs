@@ -16,14 +16,14 @@ public class Coin : MonoBehaviour
     Animation anim;
     void Start()
     {
-        mainCamera = Camera.main; // Get the main camera
+        mainCamera = Camera.main;
         anim = GetComponent<Animation>();
         coinText = CoinsUI.Instance.getCoinCounter();
     }
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player")) // Assuming the player is tagged as "Player"
+        if (other.gameObject.CompareTag("Player"))
         {
             StartCoroutine(MoveToUI());
         }
@@ -35,7 +35,6 @@ public class Coin : MonoBehaviour
         Vector3 startPosition = transform.position;
         Vector3 endPosition = mainCamera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, mainCamera.WorldToScreenPoint(startPosition).z)); // Top right of the screen
         Vector3 startScale = transform.localScale;
-        Vector3 endScale = Vector3.zero; // Shrink to zero
         float journeyLength = Vector3.Distance(startPosition, endPosition);
         float startTime = Time.time;
 

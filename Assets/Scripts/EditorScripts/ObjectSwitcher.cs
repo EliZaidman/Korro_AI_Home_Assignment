@@ -52,6 +52,7 @@ public class ObjectSwitcher : MonoBehaviour
         DestroyImmediate(gameObject);
     }
 
+    //Choose what to take
     private void ConfigureObjectSwitcher(GameObject newObject)
     {
         ObjectSwitcher newSwitcher = newObject.AddComponent<ObjectSwitcher>();
