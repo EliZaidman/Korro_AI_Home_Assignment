@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CoinsUI : MonoBehaviour
 {
@@ -24,7 +25,8 @@ public class CoinsUI : MonoBehaviour
     #endregion
     private TextMeshProUGUI coinCounter;
     public static event Action<Vector3> OnCoinCollected; // Event for grounded state change
-
+    public Image hasKeyIcon;
+    public Sprite TrueImage;
     int counter = 0;
     private void Start()
     {
@@ -33,12 +35,18 @@ public class CoinsUI : MonoBehaviour
     private void OnEnable()
     {
         Coin.OnCoinCollected += Coin_OnCoinCollected;
+        Key.OnCollectingKey += Key_OnCollectingKey;
+    }
+
+    private void Key_OnCollectingKey(int obj)
+    {
+        hasKeyIcon.sprite = TrueImage;
     }
 
     private void OnDisable()
     {
         Coin.OnCoinCollected -= Coin_OnCoinCollected;
-
+        Key.OnCollectingKey -= Key_OnCollectingKey;
     }
     private void Coin_OnCoinCollected(int obj)
     {
