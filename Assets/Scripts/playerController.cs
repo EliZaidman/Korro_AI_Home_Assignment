@@ -20,11 +20,23 @@ public class playerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        cutsceneTimer = cutsceneDuration;
     }
 
+
+    public float cutsceneDuration = 5f; // Duration of the cutscene in seconds
+    private float cutsceneTimer;
     void Update()
     {
-        if (isDisabled)
+        if (cutsceneTimer > 0)
+        {
+            cutsceneTimer -= Time.deltaTime;
+            if (cutsceneTimer <= 0)
+            {
+                
+            }
+        }
+        else if (isDisabled)
         {
             disableTimer -= Time.deltaTime;
             if (disableTimer <= 0)
