@@ -39,4 +39,17 @@ public class TrapCanon : MonoBehaviour
             }
         }
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            print("Inside Player");
+            PlayerHealth player = collision.gameObject.GetComponent<PlayerHealth>();
+            if (player != null)
+            {
+                player.Hit(trapDmg);
+            }
+        }
+    }
 }

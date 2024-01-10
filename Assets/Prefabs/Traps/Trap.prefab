@@ -47,7 +47,7 @@ GameObject:
   - component: {fileID: -7800717215030149220}
   m_Layer: 0
   m_Name: Trap
-  m_TagString: Untagged
+  m_TagString: Trap
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -162,8 +162,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3ad129f4be05bd4f81b0e11c60fdb29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  replacementObjects: []
+  varientPrefabs: []
   selectedIndex: 0
+  shouldRetainRotation: 1
 --- !u!1 &4007154654560917937
 GameObject:
   m_ObjectHideFlags: 0
